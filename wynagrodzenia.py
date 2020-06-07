@@ -22,12 +22,15 @@ class Pracownik:
 
     def oblicz_skladki_prac(self):
         a = self.brutto
-        skladki = round(round(a * 0.0976, 2) + round(a * 0.065, 2) + round(a * 0.0193, 2) + round(a * 0.0245, 2) + round(a * 0.001, 2), 2)
+        skladki = round(
+            round(a * 0.0976, 2) + round(a * 0.065, 2) + round(a * 0.0193, 2) + round(a * 0.0245, 2) + round(a * 0.001,
+                                                                                                             2), 2)
         self.skladki = skladki
         return skladki
 
     def oblicz_laczny_koszt(self):
         return self.brutto + self.skladki
+
 
 wyniki = []
 laczny_koszt = 0
@@ -43,7 +46,8 @@ for i in range(ile_pracownikow):
     netto = '%.2f' % pracownik.oblicz_wyn_netto()
     skladki = '%.2f' % pracownik.oblicz_skladki_prac()
     koszt = '%.2f' % pracownik.oblicz_laczny_koszt()
-    wyniki.append(pracownik.pobierz_imie() + "\nWynagrodzenie netto: " + netto + " Składki pracodawcy: " + skladki + " Łączny koszt na pracownika: " + koszt)
+    wyniki.append(
+        pracownik.pobierz_imie() + "\nWynagrodzenie netto: " + netto + " Składki pracodawcy: " + skladki + " Łączny koszt na pracownika: " + koszt)
     laczny_koszt = laczny_koszt + pracownik.oblicz_laczny_koszt()
 for y in range(len(wyniki)):
     print(wyniki[y])
