@@ -1,14 +1,14 @@
-class Pracownik:
-    def __init__(self, imie, brutto):
-        self.imie = imie
-        self.brutto = brutto
-        self.skladki = 0.00
+class Employee:
+    def __init__(self, name, gross_salary):
+        self.name = name
+        self.gross_salary = gross_salary
+        self.contributions = 0.00
 
-    def pobierz_imie(self):
-        return self.imie
+    def get_name(self):
+        return self.name
 
-    def oblicz_wyn_netto(self):
-        a = self.brutto
+    def calculate_net_salary(self):
+        a = self.gross_salary
         c = round(round(a * 0.0976, 2) + round(a * 0.015, 2) + round(a * 0.0245, 2), 2)
         d = round(a - c, 2)
         e = round(d * 0.09, 2)
@@ -20,35 +20,35 @@ class Pracownik:
         k = round(a - c - e - j, 2)
         return k
 
-    def oblicz_skladki_prac(self):
-        a = self.brutto
-        skladki = round(
+    def calculate_contributions(self):
+        a = self.gross_salary
+        contributions = round(
             round(a * 0.0976, 2) + round(a * 0.065, 2) + round(a * 0.0193, 2) + round(a * 0.0245, 2) + round(a * 0.001,
                                                                                                              2), 2)
-        self.skladki = skladki
-        return skladki
+        self.contributions = contributions
+        return contributions
 
-    def oblicz_laczny_koszt(self):
-        return self.brutto + self.skladki
+    def calculate_total_cost(self):
+        return self.gross_salary + self.contributions
 
 
-wyniki = []
-laczny_koszt = 0
+results = []
+sum_of_total_costs = 0
 
 print("Podaj liczbę pracowników:")
-ile_pracownikow = int(input())
-for i in range(ile_pracownikow):
+number_of_employees = int(input())
+for x in range(number_of_employees):
     print("Podaj imię pracownika")
-    imie = input()
+    name_from_input = input()
     print("Podaj wynagrodzenie brutto pracownika")
-    brutto = float(input())
-    pracownik = Pracownik(imie, brutto)
-    netto = '%.2f' % pracownik.oblicz_wyn_netto()
-    skladki = '%.2f' % pracownik.oblicz_skladki_prac()
-    koszt = '%.2f' % pracownik.oblicz_laczny_koszt()
-    wyniki.append(
-        pracownik.pobierz_imie() + "\nWynagrodzenie netto: " + netto + " Składki pracodawcy: " + skladki + " Łączny koszt na pracownika: " + koszt)
-    laczny_koszt = laczny_koszt + pracownik.oblicz_laczny_koszt()
-for y in range(len(wyniki)):
-    print(wyniki[y])
-print("\nŁączny koszt dla pracodawcy: " + ('%.2f' % laczny_koszt))
+    gross_salary_from_input = float(input())
+    employee = Employee(name_from_input, gross_salary_from_input)
+    calculated_net_salary = '%.2f' % employee.calculate_net_salary()
+    calculated_contributions = '%.2f' % employee.calculate_contributions()
+    calculated_total_cost = '%.2f' % employee.calculate_total_cost()
+    results.append(
+        employee.get_name() + "\nWynagrodzenie netto: " + calculated_net_salary + " Składki pracodawcy: " + calculated_contributions + " Łączny koszt na pracownika: " + calculated_total_cost)
+    sum_of_total_costs = sum_of_total_costs + employee.calculate_total_cost()
+for y in range(len(results)):
+    print(results[y])
+print("\nŁączny koszt dla pracodawcy: " + ('%.2f' % sum_of_total_costs))
